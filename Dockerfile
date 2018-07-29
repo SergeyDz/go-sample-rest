@@ -1,5 +1,5 @@
 # build stage
-FROM golang:alpine AS build-env
+FROM golang:onbuild AS build-env
 ADD . /src
 RUN cd /src && go get github.com/labstack/echo
 RUN cd /src && go build -o goapp
