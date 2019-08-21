@@ -1,12 +1,12 @@
 # build stage
-FROM golang:onbuild AS build-env
+FROM golang:1.11 as build
 WORKDIR /app
 ADD . .
 RUN go get github.com/labstack/echo
-RUN go build -o out/app
+RUN CGO_ENABLED=0 GOOS=linux govvv build -a -installsuffix cgo -o out/app
 
-# final stage
-FROM alpine
+FROM alpine:latest as app
 WORKDIR /app
-COPY --from=build-env /app/out .
+COPY --from=build /app/out .
+EXPOSE 8080
 ENTRYPOINT ["./app"]
