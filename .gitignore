@@ -34,3 +34,4 @@ settings.json
 Common.groovy
 CommonPipeline.groovy
 GitVersion.yml
+vendor
