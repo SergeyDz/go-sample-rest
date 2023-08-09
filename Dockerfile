@@ -6,7 +6,7 @@ RUN go get github.com/labstack/echo
 RUN go get github.com/ahmetb/govvv
 RUN CGO_ENABLED=0 GOOS=linux govvv build -a -installsuffix cgo -o out/app
 
-FROM alpine:latest as app
+FROM alpine:3.18.3 as app
 WORKDIR /app
 COPY --from=build /app/out .
 EXPOSE 8080
